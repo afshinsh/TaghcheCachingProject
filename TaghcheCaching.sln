@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaghcheCaching", "TaghcheCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaghcheCaching.InfraStructure", "TaghcheCaching.InfraStructure\TaghcheCaching.InfraStructure.csproj", "{C0BF727D-F865-49E6-8FAC-C00D5D790EEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaghcheCaching.Application", "TaghcheCaching.Application\TaghcheCaching.Application.csproj", "{14CD4B20-4226-42F8-90B6-B68FF64A15DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C0BF727D-F865-49E6-8FAC-C00D5D790EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BF727D-F865-49E6-8FAC-C00D5D790EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BF727D-F865-49E6-8FAC-C00D5D790EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14CD4B20-4226-42F8-90B6-B68FF64A15DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14CD4B20-4226-42F8-90B6-B68FF64A15DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14CD4B20-4226-42F8-90B6-B68FF64A15DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14CD4B20-4226-42F8-90B6-B68FF64A15DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
