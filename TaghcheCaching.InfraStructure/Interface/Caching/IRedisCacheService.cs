@@ -8,5 +8,8 @@ namespace TaghcheCaching.InfraStructure.Interface.Caching
 {
     public interface IRedisCacheService
     {
+        public Task SetInMemory(int id, object book);
+        public Task<object?> GetFromRedis(int id);
+
     }
 }

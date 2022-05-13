@@ -8,5 +8,7 @@ namespace TaghcheCaching.InfraStructure.Interface.Fetching
 {
     public interface ITaghcheFetchService
     {
+        public Task<object> FetchBook(int id);
+
     }
 }

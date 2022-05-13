@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaghcheCaching.InfraStructure.Utilities;
 
 namespace TaghcheCaching.InfraStructure
 {
@@ -27,19 +28,19 @@ namespace TaghcheCaching.InfraStructure
 
         }
 
-        public Task<string> GetAsync(string url)
+        public async Task<string> GetAsync(string url)
         {
             var request = CreateRequest(Method.Get);
-            return ExecuteAsync(url, request);
+            return await ExecuteAsync(url, request);
         }
 
-        public Task<string> PostAsync(string url, object body)
+        public async Task<string> PostAsync(string url, object body)
         {
             var request = CreateRequest(Method.Post);
             request.AddJsonBody(body);
-            return ExecuteAsync(url, request);
+            return await ExecuteAsync(url, request);
         }
-/*
+
         public async Task<T> GetAsync<T>(string url)
         {
             return ExtractData<T>(await GetAsync(url));
@@ -49,14 +50,14 @@ namespace TaghcheCaching.InfraStructure
         {
             return ExtractData<T>(await PostAsync(url, body));
         }
-*/
+
         private static async Task<string> ExecuteAsync(string url, RestRequest request)
         {
             var client = new RestClient(url);
             var response = await client.ExecuteAsync(request);
             return response.Content;
         }
-/*
+
         private T ExtractData<T>(string response)
         {
             try
@@ -67,7 +68,7 @@ namespace TaghcheCaching.InfraStructure
             {
                 return default;
             }
-        }*/
+        }
 
         public void AddHeader(string key, string value)
         {
