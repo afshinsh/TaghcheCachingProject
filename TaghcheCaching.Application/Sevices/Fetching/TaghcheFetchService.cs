@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaghcheCaching.InfraStructure;
 using TaghcheCaching.InfraStructure.Interface.Fetching;
+using TaghcheCaching.InfraStructure.Utilities;
 
 namespace TaghcheCaching.Application.Sevices.Fetching
 {

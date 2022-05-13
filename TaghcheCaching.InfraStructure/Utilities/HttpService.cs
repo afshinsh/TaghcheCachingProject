@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaghcheCaching.InfraStructure.Utilities;
 
-namespace TaghcheCaching.InfraStructure
+namespace TaghcheCaching.InfraStructure.Utilities
 {
     public class HttpService
     {
