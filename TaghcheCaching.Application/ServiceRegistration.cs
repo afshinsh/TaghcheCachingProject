@@ -2,10 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using TaghcheCaching.Application.Manager;
 using TaghcheCaching.Application.Sevices.Caching;
-using TaghcheCaching.Application.Sevices.Fetching;
 using TaghcheCaching.InfraStructure;
-using TaghcheCaching.InfraStructure.Interface.Caching;
-using TaghcheCaching.InfraStructure.Interface.Fetching;
+using TaghcheCaching.InfraStructure.Interfaces.Caching;
 using TaghcheCaching.InfraStructure.Utilities;
 
 namespace TaghcheCaching.Application
@@ -15,12 +13,14 @@ namespace TaghcheCaching.Application
         public static void AddInfraServices(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddStackExchangeRedisCache(o => o.Configuration = configuration["Redis"]);
-            services.AddScoped<IInMemoryCacheService, InMemoryCacheService>();
-            services.AddScoped<IRedisCacheService, RedisCacheService>();
-            services.AddScoped<ITaghcheFetchService, TaghcheFetchService>();
-            services.AddScoped<CachingManager>();
+            services.AddStackExchangeRedisCache(o => o.Configuration = configuration["Redis"]);  
             services.AddScoped<HttpService>();
+            services.AddScoped<IManager, ManagerService>();
+            services.AddScoped<MemoryManager>();
+            services.AddScoped<RedisManager>();
+            services.AddScoped<TaaghcheFetchManager>();
+
+            services.AddScoped<CachingManager>();
 
         }
     }

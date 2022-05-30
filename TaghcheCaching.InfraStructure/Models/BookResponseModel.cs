@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaghcheCaching.Application.Models
+namespace TaghcheCaching.InfraStructure.Models
 {
-    public class ResponseModel
+    public class BookResponseModel
     {
         public object Data { get; set; }
         public bool Success { get; set; }
