@@ -27,7 +27,7 @@ namespace TaghcheCaching.Application.Manager
 
             var book = await _managerService.GetBook(id.ToString());
             if (book.Data is null)
-                return new BookResponseModel { Success = false, Message = "Book Not Fount!" };
+                return new BookResponseModel { Success = false, Message = "Book Not Found!" };
             else
                 return book;
         }
