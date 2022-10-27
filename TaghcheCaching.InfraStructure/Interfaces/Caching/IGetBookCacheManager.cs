@@ -9,7 +9,6 @@ namespace TaghcheCaching.InfraStructure.Interfaces.Caching
 {
     public interface IGetBookCacheManager
     {
-        public IGetBookCacheManager? NextManager { get; set; }
         public Task<BookResponseModel> GetBook(string id);
         public abstract void SetBook(string id, object? value);
     }

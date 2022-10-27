@@ -10,40 +10,27 @@ using TaghcheCaching.InfraStructure.Models;
 
 namespace TaghcheCaching.Application.Sevices.Caching
 {
-    public class MemoryManager : IGetBookCacheManager
+    public class MemoryGetBookCacheManager : GetBookCacheManager
     {
         private readonly IMemoryCache _memoryCache;
-        public IGetBookCacheManager? NextManager { get ; set ; }
 
-        public MemoryManager(IMemoryCache memoryCache, IGetBookCacheManager bookCacheManager)
+        public MemoryGetBookCacheManager(IMemoryCache memoryCache, IGetBookCacheManager bookCacheManager)
         {
             _memoryCache = memoryCache;
             NextManager = bookCacheManager;
         }
 
-        public async Task<BookResponseModel> GetBook(string id)
-
+        public override async Task<BookResponseModel> GetBook(string id)
         {
             if (_memoryCache.TryGetValue(id.ToString(), out object value))
             {
                 return new BookResponseModel { Data = value, Message = "Read From Memory"};
             }
-            else if (NextManager != null)
-            {
-                var bookModel = await NextManager.GetBook(id);
-                if (bookModel.Data != null)
-                {
-                    SetBook(id, bookModel.Data);
-                }
-                return bookModel;
-            }
-            else
-            {
-                return null;
-            }
+
+            return await GetAndSetBook(id);
         }
 
-        public void SetBook(string id, object? value)
+        public override void SetBook(string id, object? value)
         {
             var cacheExpiryOptions = new MemoryCacheEntryOptions
             {

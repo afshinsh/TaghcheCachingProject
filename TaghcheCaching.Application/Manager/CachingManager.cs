@@ -21,19 +21,19 @@ namespace TaghcheCaching.Application.Manager
             IDistributedCache distributedCache,
             HttpService httpService)
         {
-            _managerService = new MemoryManager(memoryCache,
-                new RedisManager(distributedCache,
-                new TaaghcheFetchManager(httpService)));
+            _managerService = new MemoryGetBookCacheManager(memoryCache,
+                new RedisGetBookCacheManager(distributedCache,
+                new TaaghcheGetBookManager(httpService)));
         }
 
         public async Task<BookResponseModel> PrepareBook(int id)
         {
-
             var book = await _managerService.GetBook(id.ToString());
-            if (book.Data is null)
+            if (book.Data == null)
+            {
                 return new BookResponseModel { Success = false, Message = "Book Not Found!" };
-            else
-                return book;
+            }
+            return book;
         }
     }
 }

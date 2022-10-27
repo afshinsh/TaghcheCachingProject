@@ -11,18 +11,17 @@ using TaghcheCaching.InfraStructure.Utilities;
 
 namespace TaghcheCaching.Application.Sevices.Caching
 {
-    public class RedisManager : IGetBookCacheManager
+    public class RedisGetBookCacheManager : GetBookCacheManager
     {
         private readonly IDistributedCache _distributedCache;
-        public IGetBookCacheManager? NextManager { get; set; }
 
-        public RedisManager(IDistributedCache distributedCache, IGetBookCacheManager bookCacheManager)
+        public RedisGetBookCacheManager(IDistributedCache distributedCache, IGetBookCacheManager bookCacheManager)
         {
             _distributedCache = distributedCache;
             NextManager = bookCacheManager;
         }
 
-        public async Task<BookResponseModel> GetBook(string id)
+        public override async Task<BookResponseModel> GetBook(string id)
         {
             var book = await _distributedCache.GetAsync(id.ToString());
             if (book != null)
@@ -34,22 +33,10 @@ namespace TaghcheCaching.Application.Sevices.Caching
                     Message = "Read From Redis" 
                 };
             }
-            else if (NextManager != null)
-            {
-                var bookModel = await NextManager.GetBook(id);
-                if (bookModel.Data != null)
-                {
-                    SetBook(id, bookModel.Data);
-                }
-                return bookModel;
-            }
-            else
-            {
-                return null;
-            }
+            return await GetAndSetBook(id);
         }
 
-        public void SetBook(string id, object? value)
+        public override void SetBook(string id, object? value)
         {
             var options = new DistributedCacheEntryOptions()
                             .SetAbsoluteExpiration(DateTime.Now.AddMinutes(2))

@@ -10,19 +10,18 @@ using TaghcheCaching.InfraStructure.Utilities;
 
 namespace TaghcheCaching.Application.Sevices.Caching
 {
-    public class TaaghcheFetchManager : IGetBookCacheManager
+    public class TaaghcheGetBookManager : GetBookCacheManager
     {
 
-        public IGetBookCacheManager? NextManager { get; set; } = null;
         private readonly HttpService _httpService;
         private readonly string FETCH_BOOK_URL = "https://get.taaghche.com/v2/book/{0}";
 
-        public TaaghcheFetchManager(HttpService httpService)
+        public TaaghcheGetBookManager(HttpService httpService)
         {
             _httpService = httpService;
         }
 
-        public async Task<BookResponseModel> GetBook(string id)
+        public override async Task<BookResponseModel> GetBook(string id)
         {
             var url = string.Format(FETCH_BOOK_URL, id);
             var response = await _httpService.GetAsync<object>(url);
@@ -33,7 +32,7 @@ namespace TaghcheCaching.Application.Sevices.Caching
             };
         }
 
-        public void SetBook(string id, object? value)
+        public override void SetBook(string id, object? value)
         {
             return;
         }
