@@ -51,11 +51,11 @@ namespace TaghcheCaching.InfraStructure.Utilities
             return ExtractData<T>(await PostAsync(url, body));
         }
 
-        private static async Task<string> ExecuteAsync(string url, RestRequest request)
+        private static async Task<string?> ExecuteAsync(string url, RestRequest request)
         {
             var client = new RestClient(url);
             var response = await client.ExecuteAsync(request);
-            return response.Content;
+            return response?.Content;
         }
 
         private T ExtractData<T>(string response)

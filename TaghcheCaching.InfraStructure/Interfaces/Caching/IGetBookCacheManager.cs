@@ -7,13 +7,10 @@ using TaghcheCaching.InfraStructure.Models;
 
 namespace TaghcheCaching.InfraStructure.Interfaces.Caching
 {
-    public interface IManager
+    public interface IGetBookCacheManager
     {
-
-        public void SetNextManager(IManager manager);
-
+        public IGetBookCacheManager? NextManager { get; set; }
         public Task<BookResponseModel> GetBook(string id);
         public abstract void SetBook(string id, object? value);
-
     }
 }

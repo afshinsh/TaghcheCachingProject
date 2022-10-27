@@ -15,11 +15,6 @@ namespace TaghcheCaching.Application
 
             services.AddStackExchangeRedisCache(o => o.Configuration = configuration["Redis"]);  
             services.AddScoped<HttpService>();
-            services.AddScoped<IManager, ManagerService>();
-            services.AddScoped<MemoryManager>();
-            services.AddScoped<RedisManager>();
-            services.AddScoped<TaaghcheFetchManager>();
-
             services.AddScoped<CachingManager>();
 
         }
