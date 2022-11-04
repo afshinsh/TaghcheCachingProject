@@ -15,20 +15,21 @@ namespace TaghcheCaching.Application.Manager
     public class CachingManager
     {
 
-        private readonly IGetBookCacheManager _managerService;
+        private readonly IGetBookCacheManager _getBookManager;
 
         public CachingManager(IMemoryCache memoryCache, 
             IDistributedCache distributedCache,
             HttpService httpService)
         {
-            _managerService = new MemoryGetBookCacheManager(memoryCache,
+            _getBookManager =
+                new MemoryGetBookCacheManager(memoryCache,
                 new RedisGetBookCacheManager(distributedCache,
                 new TaaghcheGetBookManager(httpService)));
         }
 
         public async Task<BookResponseModel> PrepareBook(int id)
         {
-            var book = await _managerService.GetBook(id.ToString());
+            var book = await _getBookManager.GetBook(id.ToString());
             if (book.Data == null)
             {
                 return new BookResponseModel { Success = false, Message = "Book Not Found!" };
